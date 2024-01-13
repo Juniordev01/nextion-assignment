@@ -50,8 +50,11 @@
 
     <!-- Volt CSS -->
     <link type="text/css" href="../../css/volt.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
     <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
 
 </head>
+
 

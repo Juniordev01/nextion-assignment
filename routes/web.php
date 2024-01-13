@@ -15,11 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',  [HomeController::class,'registerUser']);
+Route::get('/',  [HomeController::class, 'registerUser']);
 
-Auth::routes();
+Auth::routes([
+    'verify' => true
+]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => ['auth', 'verified']], function () {
 
-Route::get('users',[UserController::class,'index'])->name('getUsers');
-Route::get('user_profile/{id}',[UserController::class,'profile'])->name('view_profile');
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    Route::get('users', [UserController::class, 'index'])->name('getUsers');
+    Route::get('user_profile/{id}', [UserController::class, 'profile'])->name('view_profile');
+    Route::put('user_update/{id}', [UserController::class, 'updateProfile'])->name('update_profile');
+    Route::get('varify_user', [UserController::class, 'index'])->name('verification.resend');
+});
