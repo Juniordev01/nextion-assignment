@@ -25,4 +25,9 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function registerUser()
+    {
+        return auth()->user() ? redirect('home') : view('auth.register');
+    }
 }
